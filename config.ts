@@ -5,7 +5,7 @@ const config = {
   domainName:
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://quillminds.com",
+      : "https://apartment-life.vercel.app",
 };
 
 export default config;
