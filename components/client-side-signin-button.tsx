@@ -1,41 +1,43 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/supabase/client";
-import config from "@/config";
+import { Loader2 } from "lucide-react";
 
-export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
+interface ClientSideSignInButtonProps {
+  currentRoute: string; // The current route the user is on (e.g., /events/[id])
+}
+
+export function ClientSideSignInButton({ currentRoute }: ClientSideSignInButtonProps) {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const priceId = searchParams.get("priceId");
   const discountCode = searchParams.get("discountCode");
 
-  const handleGoogleSignIn = () => {
-    const redirectTo = `${config.domainName}/api/auth/callback`;
+  const handleGoogleSignIn = async () => {
+    const redirectTo = `${window.location.origin}/api/auth/callback`;
     setLoading(true);
+
     const supabase = createClient();
-    supabase.auth.signInWithOAuth({
+
+    await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
         redirectTo: `${redirectTo}?priceId=${encodeURIComponent(
           priceId || ""
         )}&discountCode=${encodeURIComponent(
           discountCode || ""
-        )}&redirect=${encodeURIComponent("/profile")}`,
+        )}&redirect=${encodeURIComponent(currentRoute)}`,
       },
     });
+
     setLoading(false);
   };
 
   return (
-    <div className="flex items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
-      <div className="w-full max-w-md">
-        <div className="mt-10">
-            <div className="space-y-6">
-              <Button
+    <Button
                 onClick={handleGoogleSignIn}
                 className="w-full h-12 font-medium text-gray-700 bg-white rounded-lg border border-gray-200 shadow-sm transition-all hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
@@ -61,13 +63,9 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                         d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                       />
                     </svg>
-                    Continue with Google
+                    Sign In to Register
                   </div>
                 )}
               </Button>
-            </div>
-        </div>
-      </div>
-    </div>
   );
 }
