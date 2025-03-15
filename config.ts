@@ -1,10 +1,10 @@
 const config = {
-  appName: "Quillminds",
+  appName: "Apartment Life",
   appDescription:
-    "Quillminds is a platform for teachers to create and share lesson plans.",
+    "More than just neighbors – we're a community that celebrates life's moments together, creating lasting connections and memorable experiences.",
   domainName:
     process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
+      ? "https://apartment-life.vercel.app"
       : "https://apartment-life.vercel.app",
 };
 
