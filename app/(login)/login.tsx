@@ -33,6 +33,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
   return (
     <div className="flex items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
+        <p className="text-center text-lg">Login to register for upcoming events</p>
         <div className="mt-10">
             <div className="space-y-6">
               <Button
