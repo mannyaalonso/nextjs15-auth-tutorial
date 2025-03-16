@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Calendar, Home, User, UserCog } from "lucide-react";
+import { Calendar, Home, User, UserCog, HeartHandshakeIcon } from "lucide-react";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { SVGLogo } from "@/components/svg-logo"
 
@@ -21,8 +21,8 @@ export function NavigationClient({ user }: NavigationClientProps) {
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <SVGLogo />
-            <span className="text-lg font-bold hidden md:inline">Flock</span>
+            <HeartHandshakeIcon />
+            <span className="text-lg font-bold hidden md:inline">Aparmtent Life</span>
           </Link>
           <div className="flex items-center space-x-2">
             <Button
