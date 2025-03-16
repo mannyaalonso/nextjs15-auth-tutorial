@@ -49,7 +49,19 @@ async function getEvents() {
     return [];
   }
 
-  return events;
+  // Sort events: upcoming first (ascending), then past events (descending)
+  return events.sort((a, b) => {
+    const dateA = new Date(a.event_date);
+    const dateB = new Date(b.event_date);
+    const now = new Date();
+    const isAUpcoming = dateA >= now;
+    const isBUpcoming = dateB >= now;
+
+    if (isAUpcoming && !isBUpcoming) return -1;
+    if (!isAUpcoming && isBUpcoming) return 1;
+    if (isAUpcoming) return dateA.getTime() - dateB.getTime();
+    return dateB.getTime() - dateA.getTime();
+  });
 }
 
 export default async function AdminPage() {
