@@ -106,15 +106,15 @@ export default async function EventPage({ params }: PageProps) {
           <img
             src={event.image_urls[0]}
             alt={event.title}
-            className="object-cover w-full h-full"
+            className="object-cover w-full h-full rounded-3xl"
           />
         </div>
 
         <div className="space-y-6">
-          <Card>
+          <Card className="rounded-3xl">
             <CardContent className="pt-6 space-y-6">
               {isPastEvent ? (
-                <Button disabled className="w-full h-16 text-lg text-white">
+                <Button disabled className="w-full h-16 text-lg text-white rounded-3xl">
                   Event has ended
                 </Button>
               ) : user ? (
@@ -125,6 +125,7 @@ export default async function EventPage({ params }: PageProps) {
                     isDeadlinePassed={isDeadlinePassed}
                     isFull={isFull}
                     userSignup={userSignup}
+                    user={user}
                   />
                 ) : (
                   // If user is logged in but not signed up for the event, show the regular sign up button
@@ -133,6 +134,7 @@ export default async function EventPage({ params }: PageProps) {
                     isDeadlinePassed={isDeadlinePassed}
                     isFull={isFull}
                     userSignup={null} // No existing signup
+                    user={user}
                   />
                 )
               ) : (

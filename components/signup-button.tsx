@@ -6,8 +6,12 @@ import { Button } from "@/components/ui/button";
 import { createClient } from "@/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { User as SupabaseUser } from "@supabase/supabase-js";
+
+
 
 interface SignupButtonProps {
+  user: SupabaseUser | null;
   eventId: string;
   isDeadlinePassed: boolean;
   isFull: boolean;
@@ -17,9 +21,8 @@ interface SignupButtonProps {
   } | null;
 }
 
-// SignupButton (Client Component)
-
 export function SignupButton({
+  user,
   eventId,
   isDeadlinePassed,
   isFull,
@@ -43,7 +46,7 @@ export function SignupButton({
       } else {
         const { error } = await supabase.from("signups").insert({
           event_id: eventId,
-          user_id: "d951472f-2381-4756-9de9-8fdc228202a5", // Using mock user ID
+          user_id: user?.id
         });
 
         if (error) throw error;
@@ -95,7 +98,7 @@ export function SignupButton({
 
   if (isDeadlinePassed) {
     return (
-      <Button disabled className="w-full h-16 text-lg text-white">
+      <Button disabled className="w-full h-16 text-lg text-white rounded-3xl">
         Registration closed
       </Button>
     );
@@ -103,7 +106,7 @@ export function SignupButton({
 
   if (isFull && !userSignup) {
     return (
-      <Button disabled className="w-full h-16 text-lg text-white">
+      <Button disabled className="w-full h-16 text-lg text-white rounded-3xl">
         Event is full
       </Button>
     );
@@ -113,7 +116,7 @@ export function SignupButton({
     return (
       <Button
         variant="destructive"
-        className="w-full h-16 text-lg bg-red-600 hover:bg-red-700 text-white"
+        className="w-full h-16 text-lg bg-red-600 hover:bg-red-700 text-white rounded-3xl"
         onClick={handleCancel}
         disabled={isLoading}
       >
@@ -131,7 +134,7 @@ export function SignupButton({
 
   return (
     <Button
-      className="w-full h-16 text-lg bg-blue-600 hover:bg-blue-700 text-white"
+      className="w-full h-16 text-lg bg-blue-600 hover:bg-blue-700 text-white rounded-3xl"
       onClick={handleSignup}
       disabled={isLoading}
     >

@@ -74,10 +74,11 @@ async function getEvents() {
   return {
     upcomingEvents: upcomingEvents || [],
     pastEvents: pastEvents || [],
-    hasMoreUpcoming: (upcomingCount || 0) > 4,
-    hasMorePast: (pastCount || 0) > 4
+    hasMoreUpcoming: (upcomingCount || 0) > 3,
+    hasMorePast: (pastCount || 0) > 3
   };
 }
+
 
 export default async function Home() {
   const { upcomingEvents, pastEvents, hasMoreUpcoming, hasMorePast } = await getEvents();
@@ -162,8 +163,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Past Events Section */}
-      {pastEvents.length > 0 && (
+    
+      {/* {pastEvents.length > 0 && (
         <section className="space-y-8 px-4 max-w-7xl mx-auto">
           <div className="flex items-center justify-between">
             <h2 className="text-3xl font-bold">Past Events</h2>
@@ -182,7 +183,7 @@ export default async function Home() {
             ))}
           </div>
         </section>
-      )}
+      )} */}
 
       {/* Mission Statement */}
       <div className="max-w-7xl mx-auto px-4 border-none">
