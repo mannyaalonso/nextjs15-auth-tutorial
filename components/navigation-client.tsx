@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Calendar, Home, User, Info } from "lucide-react";
+import { Calendar, Home, User, UserCog } from "lucide-react";
 import { User as SupabaseUser } from "@supabase/supabase-js";
 import { SVGLogo } from "@/components/svg-logo"
 
@@ -14,7 +14,7 @@ interface NavigationClientProps {
 
 export function NavigationClient({ user }: NavigationClientProps) {
   const pathname = usePathname();
-  const userRole = user?.role || 'default-role';
+  const userRole = user?.role || 'tenant';
 
   return (
     <nav className="border-b bg-white">
@@ -37,6 +37,17 @@ export function NavigationClient({ user }: NavigationClientProps) {
             </Button>
 
             <Button
+              variant={pathname === "/events" ? "default" : "ghost"}
+              size="sm"
+              asChild
+            >
+              <Link href="/events" className="md:w-auto">
+                <Calendar className="h-4 w-4 md:mr-2" />
+                <span className="hidden md:inline">Events</span>
+              </Link>
+            </Button>
+
+            <Button
               variant={pathname === "/profile" ? "default" : "ghost"}
               size="sm"
               asChild
@@ -46,6 +57,18 @@ export function NavigationClient({ user }: NavigationClientProps) {
                 <span className="hidden md:inline">Profile</span>
               </Link>
             </Button>
+
+            {userRole === 'admin' &&
+            <Button
+              variant={pathname === "/admin" ? "default" : "ghost"}
+              size="sm"
+              asChild
+            >
+              <Link href="/admin" className="md:w-auto">
+                <UserCog className="h-4 w-4 md:mr-2" />
+                <span className="hidden md:inline">Admin</span>
+              </Link>
+            </Button>}
           </div>
         </div>
       </div>
