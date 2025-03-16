@@ -4,7 +4,7 @@ const config = {
     "More than just neighbors – we're a community that celebrates life's moments together, creating lasting connections and memorable experiences.",
   domainName:
     process.env.NODE_ENV === "development"
-      ? "https://apartment-life.vercel.app"
+      ? "http://localhost:3000"
       : "https://apartment-life.vercel.app",
 };
 
