@@ -24,4 +24,3 @@ export const SVGLogo = () => (
   </svg>
 );
 
-export default SVGLogo;
