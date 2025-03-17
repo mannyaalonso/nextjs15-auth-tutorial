@@ -9,7 +9,9 @@ import { getUser } from "@/queries/user";
 import { SignupButton } from "@/components/signup-button";
 import { HostInfo } from "@/components/host-info";
 import { Button } from "@/components/ui/button";
-import { ClientSideSignInButton } from "@/components/client-side-signin-button"; // Import the Client-Side Sign In Button
+import { ClientSideSignInButton } from "@/components/client-side-signin-button"; 
+import { QRCode } from "@/components/qr-code";
+
 
 // Define the type for signup objects
 interface Signup {
@@ -148,6 +150,8 @@ export default async function EventPage({ params }: PageProps) {
             </CardContent>
           </Card>
         </div>
+
+        <QRCode />
       </div>
 
       <div className="mt-12">
